@@ -1,6 +1,6 @@
 # Sort Visualizer Repox
 
-## CONTENT OF THIS FILE
+### **CONTENT OF THIS FILE**
 ***
 > - Introduction
 > - Installation
@@ -8,19 +8,19 @@
 > - Configuration
 > - Maintainers
 
-## INTRODUCTION
+### **INTRODUCTION**
 ***
 > This project graphically demonstrates the different variations of some basic sorting algorithms as applied on a dynamic data bar set.
 
-## REQUIREMENTS
+### **REQUIREMENTS**
 ***
 > This code base requires no specific modules outside of a basic web browser that supports the current **javascript ES6 modules**.
 
-## INSTALLATION
+### **INSTALLATION**
 ***
 > After cloning the main, repository into a local system directory, run the ***.\index.html*** file in a javascript-supported web browser.
 
-## CONFIGURATION
+### **CONFIGURATION**
 ***
 > 1. The main graphical index of the application consists of three sections of user interaction.
 >     - **Control Panel**
