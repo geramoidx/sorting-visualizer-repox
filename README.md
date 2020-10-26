@@ -5,7 +5,7 @@
 > - Introduction
 > - Installation
 > - Requirements
-> - COnfiguration
+> - Configuration
 > - Maintainers
 
 ## INTRODUCTION
@@ -14,4 +14,19 @@
 
 ## REQUIREMENTS
 ***
-> This code base requires no specific modules outside of a basic web browser that supports the current javascript ES6 modules.
+> This code base requires no specific modules outside of a basic web browser that supports the current **javascript ES6 modules**.
+
+## INSTALLATION
+***
+> After cloning the main, repository into a local system directory, run the ***.\index.html*** file in a javascript-supported web browser.
+
+## CONFIGURATION
+***
+> 1. The main graphical index of the application consists of three sections of user interaction.
+>     - **Control Panel**
+>     - **Graphical Canvas**
+>     - **Bar Navigator**
+>
+> 2. Control Panel maintains the projects active buttons for the various sort algorithms, as well as a generic array button for automatically refreshing page activity.
+> 3. Graphic Canvas, this is where the magic happens.
+> 4. Bar navigator enables view of sorted bars and maximizes concurrency on the graphical canvas.
