@@ -1,4 +1,4 @@
-# Sort Visualizer Repox
+# Sorting Visualizer Repox
 
 ### **CONTENT OF THIS FILE**
 ***
