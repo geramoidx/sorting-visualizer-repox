@@ -6,7 +6,6 @@
 > - Installation
 > - Requirements
 > - Configuration
-> - Maintainers
 
 ### **INTRODUCTION**
 ***
@@ -27,6 +26,6 @@
 >     - **Graphical Canvas**
 >     - **Bar Navigator**
 >
-> 2. Control Panel maintains the projects active buttons for the various sort algorithms, as well as a generic array button for automatically refreshing page activity.
+> 2. Control Panel maintains the projects active buttons for the various sort algorithms, as well as a generic array button for automatically refreshing page activity. There is also an adjustable range slider that randomizes the data bar set and changes the sorting speeds.
 > 3. Graphic Canvas, this is where the magic happens.
 > 4. Bar navigator enables view of sorted bars and maximizes concurrency on the graphical canvas.
