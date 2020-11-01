@@ -32,4 +32,4 @@
 
 ### **MAINTAINERS**
 ***
-> geramoidx
+> geramoidx. Visit live demo at [Sorting Visualizer Demo](https://geramoidx.github.io/sorting-visualizer-repox/)
