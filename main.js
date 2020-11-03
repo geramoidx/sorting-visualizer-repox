@@ -5,4 +5,14 @@ window.onload = function() {
     var heapSortBtn = document.getElementById("heapSort");
     var mergeSortBtn = document.getElementById("mergeSort");
     var quickSortBtn = document.getElementById("quickSort");
+
+    class CanvasObject {
+        constructor() {
+
+        }
+
+        clear() {}
+
+        get getCtx() {}
+    }
 }
