@@ -9,7 +9,6 @@ window.onload = function() {
     var ShiftedBars = [];
     var IsHeapSorting = false;
     var IsBubbleSorted = false;
-
     class NavigatorObject {
         constructor() {
             let navigator = document.getElementById("navigator");
