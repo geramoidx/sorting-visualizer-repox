@@ -1,14 +1,16 @@
 window.onload = function() {
-    var slider = document.getElementById("myRange");
-    var generateNewArrayBtn = document.getElementById("newArray");
-    var bubbleSortBtn = document.getElementById("bubbleSort");
-    var heapSortBtn = document.getElementById("heapSort");
-    var mergeSortBtn = document.getElementById("mergeSort");
-    var quickSortBtn = document.getElementById("quickSort");
-    var HbarArray = [];
-    var ShiftedBars = [];
-    var IsHeapSorting = false;
-    var IsBubbleSorted = false;
+    var slider = document.getElementById("myRange"); // range slider for changing size bars and sorting speeds
+    var generateNewArrayBtn = document.getElementById("newArray"); // generate new array button
+    var bubbleSortBtn = document.getElementById("bubbleSort"); // bubble sort button
+    var heapSortBtn = document.getElementById("heapSort"); // heap sort button
+    var mergeSortBtn = document.getElementById("mergeSort"); // merge sort button
+    var quickSortBtn = document.getElementById("quickSort"); // quick sort button
+    var HbarArray = []; // general array for all bar component nodes
+    var ShiftedBars = []; // shifted bars generated from popping binary tree on heap sort
+    var IsHeapSorting = false; // boolean check for heap sort
+    var IsBubbleSorted = false; // boolean check for bubble sort
+
+    // class implementation for navigator object - view specific bars relative to mouse x, y
     class NavigatorObject {
         constructor() {
             let navigator = document.getElementById("navigator");
