@@ -39,8 +39,8 @@ window.onload = function() {
         }
     }
 
-    const navigator = new NavigatorObject();
-    var ctxnav = navigator.getCtx;
+    const navigator = new NavigatorObject(); // instance of navigator object
+    var ctxnav = navigator.getCtx; // returns canvas 2d context interface
 
     const UpdateNavigator = () => {
         ctxnav.strokeStyle = "rgb(110, 48, 48)";
@@ -55,5 +55,17 @@ window.onload = function() {
         ctxnav.fillText("Navigator", 1 + (348 * 0.39), 20);
     }
 
-    UpdateNavigator();
+    UpdateNavigator(); // updatenavigator func
+
+    //main canvas object
+    class CanvasObject {
+        constructor() {
+        }
+
+        clear() {
+        }
+
+        get getCtx() {
+        }
+    }
 }
