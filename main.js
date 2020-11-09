@@ -291,17 +291,6 @@ window.onload = function() {
 
         this.display();
     }
-
-    const UpdateCanvasArea = () => {
-    canvas.clear();
-
-    for (let i = 0; i < HbarArray.length; i++) {
-        HbarArray[i].display();
-    }
-
-    for (let i = 0; i < ShiftedBars.length; i++) {
-        ShiftedBars[i].display();
-    }
 }
 }
 }
