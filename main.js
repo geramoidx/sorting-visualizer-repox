@@ -240,42 +240,7 @@ window.onload = function() {
 
         //let leftbox = destinationX - (this._var * 2 * (this.rs ** 2));
 
-        if (this.isResized) {
-
-            if (Math.ceil(this._x) == Math.floor(destinationX)) {
-                this._x = destinationX;
-                //console.log("lfbx : " + leftbox);
-                clearInterval(inter);
-                this.unmark();
-                UpdateCanvasArea();
-                lswap = true;
-                // console.log("Stop from");
-
-                //this._x -= this.speed;
-                //this.unsize(destinationX, false);
-
-            } else {
-                let nextX = this._x - this.speed;
-
-                //this._x -= this.speed;
-                if (nextX < destinationX) {
-                    // console.log("configurfation settings");
-                    let lp = Math.ceil(destinationX - nextX);
-                    // console.log("this x:" + this._x + ", dest: " + destinationX + ", nextX: " + nextX + ", lp: " + lp);
-                    this._x = destinationX;
-                    //this._x = Math.floor(this._x);
-                    // console.log(this._x + ",== " + destinationX);
-
-                    this.unmark();
-                    UpdateCanvasArea();
-                    lswap = true;
-                    clearInterval(inter);
-
-                } else {
-                    this._x -= this.speed;
-                }
-            }
-        }
+        
 
         this.display();
     }
