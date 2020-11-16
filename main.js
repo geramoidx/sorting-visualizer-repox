@@ -88,18 +88,6 @@ window.onload = function() {
     }
 
     class ComponentHBar {
-    constructor(x, y, width, height, index) {
-        this._index = index;
-        this._x = x;
-        this._y = y;
-        this._wd = width;
-        this.rs = 0.5; // this is the resize ration of the Hbar component
-        this._var = this._wd * this.rs;
-        this._hg = height;
-        this.isResized = true;
-        this.speed = GeneralSpeed;
-        this.color = "#00b";
-    }
 
     get CurrentObj() {
         return this;
