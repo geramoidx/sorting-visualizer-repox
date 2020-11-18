@@ -291,17 +291,7 @@ if (HbarArray[j]._hg < HbarArray[j + 1]._hg) {
                 lswap = false;
                 fswap = false;
                 StartBubbleSort(HbarArray, start, end);
-            } else if (i < end) {
-                lswap = false;
-                fswap = false;
-                HbarArray[j].sortedbar();
-                i++;
-                // size = HbarArray.length - traversed;
-                j = start;
-                StartBubbleSort(HbarArray, start, end);;
-            }
-
-            clearInterval(timeoutfunc);
+            } 
         }
 
     }, time);
