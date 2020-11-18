@@ -299,16 +299,6 @@ if (HbarArray[j]._hg < HbarArray[j + 1]._hg) {
                 // size = HbarArray.length - traversed;
                 j = start;
                 StartBubbleSort(HbarArray, start, end);;
-            } else {
-                console.log("sorted there");
-                console.log("j is " + j);
-                j = start;
-                // i = 0;
-                console.log("j is " + j + " and end is " + end + " and i is : " + i);
-                traversed = 0;
-                CurrentPosition = 0;
-                size = HbarArray.length;
-                IsBubbleSorted = true;
             }
 
             clearInterval(timeoutfunc);
