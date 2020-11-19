@@ -153,34 +153,6 @@ class ComponentHBar {
 
         const unshrink = setInterval(() => {
 
-                if (Math.floor(this._x) != Math.floor(destinationX) && template) {
-                    UpdateCanvasArea();
-
-                    this._x -= this.rs * 0.5;
-                    this._wd += this.rs;
-
-                    this.display();
-
-                } else if (!template && Math.ceil(this._x) != Math.ceil(destinationX)) {
-                    UpdateCanvasArea();
-
-                    this._x += this.rs * 0.5;
-                    this._wd += -this.rs;
-
-                    this.display();
-                } else {
-
-                    // UpdateCanvasArea();
-                    //console.log("2nd : " + this._x + " width fac : " + this._wd);
-                    // if (!template) {
-                    //     this._x -= 10;
-                    // }
-
-                    // this.display();
-
-                    clearInterval(unshrink);
-                }
-
             },
             CanvasObject.SortSpeed);
     }
