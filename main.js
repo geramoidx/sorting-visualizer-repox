@@ -197,24 +197,7 @@ class ComponentHBar {
             UpdateCanvasArea();
             fswap = true;
             clearInterval(inter);
-            // console.log("Stop to");
-
-
-            //this._x += this.speed;
-            //this.unsize(destinationX, true);
-
-        } else {
-            //let nextX = this._x + this.speed;
-
-            //this._x += this.speed;
-            // console.log("thisX " + this._x + ", dest " + destinationX);
-
-            let nextX = this._x + this.speed;
-
-
-
-            //this._x -= this.speed;
-            if (nextX > destinationX) {
+            {
                 // console.log("nextX " + nextX + " " + destinationX);
                 let lp = Math.floor(nextX - destinationX);
                 // console.log("this x:" + this._x + ", dest: " + destinationX + ", nextX: " + nextX + ", lp: " + lp);
