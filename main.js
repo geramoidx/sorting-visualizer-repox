@@ -34,3 +34,21 @@ class NavigatorObject {
     return this.context;
   }
 }
+
+const navigator = new NavigatorObject();
+var ctxnav = navigator.getCtx;
+
+const UpdateNavigator = () => {
+  ctxnav.strokeStyle = "rgb(110, 48, 48)";
+  ctxnav.lineWidth = 2;
+  ctxnav.strokeRect(1, 1, 350 - 2, 250 - 2);
+
+  ctxnav.fillStyle = "rgb(110, 48, 48)";
+  ctxnav.fillRect(1, 1, 350 - 2, 30);
+
+  ctxnav.font = 15 + "px consolas";
+  ctxnav.fillStyle = "#fff";
+  ctxnav.fillText("Navigator", 1 + 348 * 0.39, 20);
+};
+
+UpdateNavigator();
