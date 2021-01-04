@@ -52,3 +52,34 @@ const UpdateNavigator = () => {
 };
 
 UpdateNavigator();
+
+var HbarArray = [];
+var ShiftedBars = [];
+
+class CanvasObject {
+  constructor() {
+    this.Canvas = document.getElementById("canvas");
+
+    this.context = document.getElementById("canvas").getContext("2d");
+
+    this._width = window.innerWidth;
+    //canvas.style.margin = "auto";
+    this._height = window.innerHeight;
+
+    // canvas.width = this._width;
+    this.Canvas.width = window.innerWidth;
+    this.Canvas.height = window.innerHeight;
+
+    this.Canvas.style.backgroundColor = "#ffb";
+
+    this.SortSpeed = 10;
+  }
+
+  clear() {
+    this.getCtx.clearRect(0, 0, this._width, this._height);
+  }
+
+  get getCtx() {
+    return this.context;
+  }
+}
