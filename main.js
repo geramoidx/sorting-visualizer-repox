@@ -388,3 +388,19 @@ const GenerateNewArray = () => {
 generateNewArrayBtn.onclick = () => {
   GenerateNewArray();
 };
+
+GenerateNewArray();
+
+window.addEventListener("resize", () => {
+  // alert("resized");
+  canvas.Canvas.width = window.innerWidth;
+  canvas.Canvas.height = window.innerHeight;
+  canvas._width = window.innerWidth;
+  canvas._height = window.innerHeight;
+
+  midpoint = canvas._width * 0.5;
+
+  //UpdateCanvasArea();
+
+  GenerateNewArray();
+});
