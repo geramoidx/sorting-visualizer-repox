@@ -320,3 +320,71 @@ const UpdateCanvasArea = () => {
         ShiftedBars[i].display();
     }
 }
+
+var time = 0.05;
+var traversed = 0;
+var CurrentPosition = traversed;
+var size = HbarArray.length - traversed;
+
+var jump = 2;
+var i = 0;
+var j = 0;
+var len = j + jump;
+let FinalSortedsConfig = false;
+var ViewIndex = 0;
+var ViewFromHeap = false;
+
+let halves = HbarArray.length;
+
+const GenerateNewArray = () => {
+  //location.reload();
+
+  ShiftedBars = [];
+  fswap = false;
+  lswap = false;
+
+  IsHeapSorting = false;
+  IsBubbleSorted = false;
+
+  let range = slider.value;
+  jump = 2 + Math.floor(parseInt(range) * ((50 - 2) / 100));
+  i = 0;
+  j = 0;
+  len = j + jump;
+  halves = 0;
+
+  ViewFromHeap = false;
+
+  ViewIndex = 0;
+  // ViewFromHeap = false;
+
+  FinalSortedConfig = false;
+
+  canvas.clear();
+
+  HbarArray = [];
+
+  for (let i = 0; i < n; i++) {
+    let ylength = Math.floor(Math.random() * (max - min)) + min;
+    let xcoord =
+      midpoint -
+      Math.floor(hbarwidith * 0.5) -
+      hbarwidith * Math.floor(n * 0.5) +
+      hbarwidith * i; // - (gap * i);
+    //console.log(xcoord);
+    HbarArray.push(new ComponentHBar(xcoord, 0, hbarwidith, ylength, i));
+  }
+
+  for (let i = 0; i < n; i++) {
+    HbarArray[i].display();
+  }
+
+  traversed = 0;
+  CurrentPosition = 1;
+  size = HbarArray.length;
+  halves = HbarArray.length;
+};
+
+generateNewArrayBtn.onclick = () => {
+  GenerateNewArray();
+};
