@@ -528,3 +528,186 @@ const StartBubbleSort = (HbarArray, start, end) => {
 bubbleSortBtn.onclick = () => {
   StartBubbleSort(HbarArray, 0, HbarArray.length);
 };
+
+const StartHeapSort = () => {
+  IsHeapSorting = true;
+  //console.log("Current Position is: " + CurrentPosition);
+  let parentposition = Math.ceil(CurrentPosition * 0.5) - 1;
+
+  //console.log("Parent Position is: " + parentposition);
+
+  let posax = Math.floor(HbarArray[CurrentPosition]._x);
+  let posbx = Math.floor(HbarArray[parentposition]._x);
+
+  HbarArray[CurrentPosition].mark();
+  HbarArray[parentposition].mark();
+
+  if (HbarArray[CurrentPosition]._hg > HbarArray[parentposition]._hg) {
+    HbarArray[CurrentPosition].misplaced();
+
+    let lp = HbarArray[CurrentPosition]._index;
+    HbarArray[CurrentPosition]._index = HbarArray[parentposition]._index;
+    HbarArray[parentposition]._index = lp;
+    //let parentposition = (Math.floor((CurrentPosition + 1) * 0.5)) - 1;
+
+    const intervalId = setInterval(() => {
+      UpdateCanvasArea();
+      HbarArray[CurrentPosition].moveFrom(posbx, intervalId);
+    }, time);
+
+    const intervalId2 = setInterval(() => {
+      UpdateCanvasArea();
+      HbarArray[parentposition].moveTo(posax, intervalId2);
+    }, time);
+
+    const timeoutfunc = setInterval(() => {
+      if (lswap && fswap) {
+        HbarArray[CurrentPosition].unmark();
+        //HbarArray[parentposition].unmark();
+
+        let leftobj = HbarArray[CurrentPosition];
+        HbarArray[CurrentPosition] = HbarArray[parentposition];
+        HbarArray[parentposition] = leftobj;
+
+        let lp = HbarArray[CurrentPosition]._index;
+        HbarArray[CurrentPosition]._index = HbarArray[parentposition]._index;
+        HbarArray[parentposition]._index = lp;
+
+        CurrentPosition++;
+
+        if (parentposition == 0) {
+          //CurrentPosition++;
+          lswap = false;
+          fswap = false;
+
+          try {
+            StartHeapSort();
+          } catch (error) {
+            console.log(
+              "CurrentPosition is : " +
+                CurrentPosition +
+                ", length: " +
+                HbarArray.length
+            );
+            clearInterval(timeoutfunc);
+          }
+        } else if (traversed < size - 1 && CurrentPosition < HbarArray.length) {
+          CurrentPosition = parentposition;
+          lswap = false;
+          fswap = false;
+
+          try {
+            StartHeapSort();
+          } catch (error) {
+            console.log(
+              "CurrentPosition is : " +
+                CurrentPosition +
+                ", length: " +
+                HbarArray.length
+            );
+            clearInterval(timeoutfunc);
+          }
+        } else if (traversed < size - 1) {
+          traversed++;
+          CurrentPosition = 1;
+          let node = HbarArray.shift();
+          node.sortedbar();
+          ShiftedBars.push(node);
+          ShiftedBars[ShiftedBars.length - 1]._index = ShiftedBars.length - 1;
+
+          for (let a = 0; a < HbarArray.length; a++) {
+            HbarArray[a]._index = a;
+          }
+
+          console.log("shifted bar size: " + ShiftedBars.length);
+
+          lswap = false;
+          fswap = false;
+          try {
+            StartHeapSort();
+          } catch (error) {
+            console.log(
+              "CurrentPosition is : " +
+                CurrentPosition +
+                ", length: " +
+                HbarArray.length
+            );
+            clearInterval(timeoutfunc);
+          }
+        } else {
+          // alert("sorted");
+          lswap = false;
+          fswap = false;
+          HbarArray[CurrentPosition - 1].sortedbar();
+          traversed = 0;
+          CurrentPosition = 1;
+        }
+
+        clearInterval(timeoutfunc);
+      }
+    }, time);
+  } else {
+    HbarArray[CurrentPosition].unmark();
+    //HbarArray[parentposition].unmark();
+
+    CurrentPosition++;
+
+    if (traversed < size - 1 && CurrentPosition < HbarArray.length) {
+      //CurrentPosition = parentposition;
+      lswap = false;
+      fswap = false;
+      try {
+        StartHeapSort();
+      } catch (error) {
+        console.log(
+          "CurrentPosition is : " +
+            CurrentPosition +
+            ", length: " +
+            HbarArray.length
+        );
+      }
+    } else if (traversed < size - 1) {
+      traversed++;
+      CurrentPosition = 1;
+      let node = HbarArray.shift();
+      node.sortedbar();
+      ShiftedBars.push(node);
+      ShiftedBars[ShiftedBars.length - 1]._index = ShiftedBars.length - 1;
+
+      for (let a = 0; a < HbarArray.length; a++) {
+        HbarArray[a]._index = a;
+      }
+
+      console.log("shifted bar size: " + ShiftedBars.length);
+      lswap = false;
+      fswap = false;
+      try {
+        StartHeapSort();
+      } catch (error) {
+        console.log(
+          "CurrentPosition is : " +
+            CurrentPosition +
+            ", length: " +
+            HbarArray.length
+        );
+      }
+    } else {
+      alert("sorted");
+      HbarArray[CurrentPosition - 1].sortedbar();
+      lswap = false;
+      fswap = false;
+      traversed = 0;
+      CurrentPosition = 1;
+    }
+  }
+};
+
+heapSortBtn.onclick = function () {
+  size = HbarArray.length;
+  traversed = 0;
+  CurrentPosition = 1;
+  lswap = false;
+  fswap = false;
+  // ViewFromHeap = true;
+  StartHeapSort();
+};
