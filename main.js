@@ -711,3 +711,100 @@ heapSortBtn.onclick = function () {
   // ViewFromHeap = true;
   StartHeapSort();
 };
+
+slider.oninput = () => {
+  ViewIndex = 0;
+
+  fswap = false;
+  lswap = false;
+
+  let lap = 0.25;
+  let range = slider.value;
+
+  UpdateCanvasArea();
+  n = minNum + parseInt(range) * ((maxNum - minNum) / 100);
+
+  time = 80 - parseInt(range) * (80 / 100);
+  // time = 0;
+  // console.log("time is " + time);
+
+  GeneralSpeed = 10 + parseInt(range) * ((500 - 10) / 100);
+  // jump = 2;
+  jump = 2 + Math.floor(parseInt(range) * ((10 - 2) / 100));
+  i = 0;
+  j = 0;
+  len = j + jump;
+  // GeneralSpeed = 1;
+  console.log("jump " + jump);
+
+  hbarwidith = maxWidth - parseInt(range) * ((maxWidth - minWidth) / 100);
+
+  let fullwid = hbarwidith * n;
+  let lapse = fullwid - canvas._width;
+
+  if (fullwid > canvas._width - 400) {
+    n = Math.floor((canvas._width / hbarwidith) * 0.85);
+  }
+
+  err = minErr + parseInt(range) * ((maxErr - minErr) / 100);
+  midpoint = canvas._width * 0.5;
+
+  GenerateNewArray();
+
+  traversed = 0;
+  CurrentPosition = traversed;
+  size = HbarArray.length;
+  halves = HbarArray.length;
+};
+
+document.getElementById("canvas").addEventListener("mousemove", (event) => {
+  let x = event.offsetX;
+  let y = event.offsetY;
+
+  let found = false;
+  //let i = 0;
+  let min = HbarArray[0]._x;
+  let max = HbarArray[HbarArray.length - 1]._x;
+  let closest;
+
+  if (ShiftedBars.length > 0) {
+    let foundInHeap = false;
+    let minsize = ShiftedBars.length;
+
+    for (let j = 0; j < ShiftedBars.length && !foundInHeap; ) {
+      let nx = ShiftedBars[j]._x;
+
+      if (Math.abs(x - nx) < hbarwidith) {
+        // console.log("found");
+        closest = ShiftedBars[j];
+        ViewIndex = ShiftedBars[j]._index;
+        foundInHeap = true;
+        ViewFromHeap = true;
+        // window.alert("found in heap");
+        j = ShiftedBars.length;
+      } else {
+        j++;
+      }
+    }
+
+    if (foundInHeap) {
+      return;
+    }
+  }
+  //console.log("array length is " + HbarArray.length);
+
+  for (let i = 0; i < HbarArray.length && !found; ) {
+    let nx = HbarArray[i]._x;
+    //console.log(nx);
+    if (Math.abs(x - nx) < hbarwidith) {
+      // console.log("found");
+      closest = HbarArray[i];
+      ViewIndex = HbarArray[i]._index;
+      found = true;
+      i = HbarArray.length;
+    } else {
+      // console.log("not found");
+      i++;
+    }
+  }
+});
