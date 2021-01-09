@@ -808,3 +808,104 @@ document.getElementById("canvas").addEventListener("mousemove", (event) => {
     }
   }
 });
+
+const CameraView = setInterval(() => {
+  ctxnav.clearRect(0, 0, 350, 250);
+  UpdateNavigator();
+
+  let bar = 69;
+  let view = 0;
+
+  if (!ViewFromHeap) {
+    if (ViewIndex >= 2 && ViewIndex <= n) {
+      view = ViewIndex - 2;
+    }
+
+    if (ViewIndex >= HbarArray.length - 2) {
+      view = ViewIndex - 4;
+    }
+  } else {
+    if (ViewIndex >= 2 && ViewIndex <= n) {
+      view = ViewIndex - 2;
+    }
+  }
+
+  let barlapse = 0;
+
+  if (ShiftedBars.length > 0) {
+    view--;
+
+    for (let i = 0; i < 5; i++) {
+      view++;
+      if (view >= ShiftedBars.length) {
+        barlapse = view;
+        let ylength = 400;
+        // let ylength = Math.floor(Math.random() * (max - min)) + min;
+        let xcoord =
+          navigator._width * 0.5 -
+          Math.floor(bar * 0.5) -
+          bar * Math.floor(5 * 0.5) +
+          bar * i; // - (gap * i);
+        //console.log(xcoord);
+        //HbarArray.push(new ComponentHBar(xcoord, 0, hbarwidith, ylength));
+        ctxnav.fillStyle = HbarArray[view - barlapse].color;
+        ctxnav.fillRect(xcoord, 30, bar, ylength);
+        ctxnav.strokeStyle = "#ffb";
+        ctxnav.lineWidth = 3;
+        ctxnav.strokeRect(xcoord, 31, bar, ylength);
+
+        ctxnav.fillStyle = "#ffb";
+        ctxnav.font = 20 + "px consolas";
+        ctxnav.fillText(
+          HbarArray[view - barlapse]._hg,
+          xcoord + bar * 0.25,
+          70
+        );
+      } else {
+        let ylength = 400;
+        // let ylength = Math.floor(Math.random() * (max - min)) + min;
+        let xcoord =
+          navigator._width * 0.5 -
+          Math.floor(bar * 0.5) -
+          bar * Math.floor(5 * 0.5) +
+          bar * i; // - (gap * i);
+        //console.log(xcoord);
+        //HbarArray.push(new ComponentHBar(xcoord, 0, hbarwidith, ylength));
+        ctxnav.fillStyle = ShiftedBars[view].color;
+        ctxnav.fillRect(xcoord, 30, bar, ylength);
+        ctxnav.strokeStyle = "#ffb";
+        ctxnav.lineWidth = 3;
+        ctxnav.strokeRect(xcoord, 31, bar, ylength);
+
+        ctxnav.fillStyle = "#ffb";
+        ctxnav.font = 20 + "px consolas";
+        ctxnav.fillText(ShiftedBars[view]._hg, xcoord + bar * 0.25, 70);
+      }
+    }
+
+    return;
+  }
+
+  for (let i = 0; i < 5; i++) {
+    let ylength = 400;
+    // let ylength = Math.floor(Math.random() * (max - min)) + min;
+    let xcoord =
+      navigator._width * 0.5 -
+      Math.floor(bar * 0.5) -
+      bar * Math.floor(5 * 0.5) +
+      bar * i; // - (gap * i);
+    //console.log(xcoord);
+    //HbarArray.push(new ComponentHBar(xcoord, 0, hbarwidith, ylength));
+    ctxnav.fillStyle = HbarArray[view].color;
+    ctxnav.fillRect(xcoord, 30, bar, ylength);
+    ctxnav.strokeStyle = "#ffb";
+    ctxnav.lineWidth = 3;
+    ctxnav.strokeRect(xcoord, 31, bar, ylength);
+
+    ctxnav.fillStyle = "#ffb";
+    ctxnav.font = 20 + "px consolas";
+    ctxnav.fillText(HbarArray[view]._hg, xcoord + bar * 0.25, 70);
+
+    view++;
+  }
+}, 100);
