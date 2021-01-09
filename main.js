@@ -909,3 +909,109 @@ const CameraView = setInterval(() => {
     view++;
   }
 }, 100);
+
+const MergeBubbleSort = (HbarArray, start, end) => {
+  // j = start;
+  let posax = Math.floor(HbarArray[j]._x);
+  let posbx = Math.floor(HbarArray[j + 1]._x);
+
+  HbarArray[j].mark();
+  HbarArray[j + 1].mark();
+
+  if (HbarArray[j]._hg < HbarArray[j + 1]._hg) {
+    HbarArray[j].misplaced();
+
+    let lp = HbarArray[j]._index;
+    HbarArray[j]._index = HbarArray[j + 1]._index;
+    HbarArray[j + 1]._index = lp;
+
+    const intervalId = setInterval(() => {
+      UpdateCanvasArea();
+      HbarArray[j + 1].moveFrom(posax, intervalId);
+    }, time);
+
+    const intervalId2 = setInterval(() => {
+      UpdateCanvasArea();
+      HbarArray[j].moveTo(posbx, intervalId2);
+    }, time);
+
+    const timeoutfunc = setInterval(() => {
+      if (lswap && fswap) {
+        let leftobj = HbarArray[j];
+        HbarArray[j] = HbarArray[j + 1];
+        HbarArray[j + 1] = leftobj;
+
+        j++;
+
+        if (j < end - (i + 1)) {
+          lswap = false;
+          fswap = false;
+          try {
+            StartBubbleSort(HbarArray, start, end);
+          } catch (error) {
+            alert("sorted ienixxnd");
+          }
+        } else if (i < end) {
+          lswap = false;
+          fswap = false;
+          HbarArray[j].sortedbar();
+          i++;
+          // size = HbarArray.length - traversed;
+          j = start;
+          try {
+            StartBubbleSort(HbarArray, start, end);
+          } catch (error) {
+            // alert("sorted ienaaaaind");
+          }
+        } else {
+          console.log("sorted there");
+          console.log("j is " + j);
+          j = start;
+          // i = 0;
+          console.log("j is " + j + " and end is " + end + " and i is : " + i);
+          traversed = 0;
+          CurrentPosition = 0;
+          size = HbarArray.length;
+          IsBubbleSorted = true;
+        }
+
+        clearInterval(timeoutfunc);
+      }
+    }, time);
+  } else {
+    j++;
+    if (j < end - (i + 1)) {
+      lswap = false;
+      fswap = false;
+      try {
+        StartBubbleSort(HbarArray, start, end);
+      } catch (error) {
+        // alert("sorted ienind");
+      }
+    } else if (i < end) {
+      HbarArray[j].sortedbar();
+      i++;
+      // size = HbarArray.length - traversed;
+      j = start;
+      lswap = false;
+      fswap = false;
+      try {
+        StartBubbleSort(HbarArray, start, end);
+      } catch (error) {
+        // alert("end herer");
+      }
+    } else {
+      console.log("sorted here");
+      // alert("sorted");
+      j = start;
+      // i = 0;
+      console.log("j is " + j + " and end is " + end + " and i is : " + i);
+      HbarArray[j].sortedbar();
+      HbarArray[j + 1].sortedbar();
+      traversed = 0;
+      CurrentPosition = traversed;
+      size = HbarArray.length;
+      IsBubbleSorted = true;
+    }
+  }
+};
