@@ -1015,3 +1015,304 @@ const MergeBubbleSort = (HbarArray, start, end) => {
     }
   }
 };
+
+const QuickSort = (init_start, init_end) => {
+
+    FinalSortedConfig = false;
+    let SortVectorStatus = [];
+
+    const partition = (start, end, pi) => {
+
+        let sorted = false;
+        let a = pi - start;
+        let b = end - (pi + 1);
+
+        if (a > 1) {
+            SortVectorStatus.push("IsSorting");
+            // console.log("caling fsort pi : " + pi + ", start: " + start);
+            sorted = sort(start, pi);
+        } else {
+            sorted = true;
+        }
+
+        if (b > 1) {
+            SortVectorStatus.push("IsSorting");
+            // console.log("caling lsort pi : " + (pi + 1) + ", start: " + end);
+            let obvalue = sort(pi + 1, end);
+        }
+
+        if (a <= 1 && b <= 1) {
+            HbarArray[start].sortedbar();
+            HbarArray[pi].sortedbar();
+
+        }
+
+    }
+
+    const checkVectorStatus = setInterval(() => {
+        if (SortVectorStatus.length == 0 && !FinalSortedConfig) {
+
+            FinalSortedConfig = true;
+            clearInterval(checkVectorStatus);
+
+            StartBubbleSort(HbarArray, 0, HbarArray.length);
+
+            for (let i = 0; i < HbarArray.length; i++) {
+                HbarArray[i].sortedbar();
+            }
+        }
+    }, 0);
+
+    const sort = (start, end) => {
+
+        let isFinished = false;
+        let j = start;
+        let pi = end - 1;
+        let isGreaterFound = false;
+        let posax = 0;
+        let posbx = 0;
+        let gi;
+
+        HbarArray[pi].misplaced();
+
+        const quickInterval = () => {
+
+            // console.log("calling quick interval 1");
+            let chmoda = false;
+            let chmodb = false;
+
+            let fnum = HbarArray[j]._hg;
+
+            if (fnum < HbarArray[pi]._hg) {
+                if (!isGreaterFound) {
+
+                    gi = j;
+                    posax = HbarArray[j]._x;
+                    isGreaterFound = true;
+                    HbarArray[j].mark();
+
+                    j++;
+                    if (j < end) {
+                        console.log("calling quick interval 2");
+                        quickInterval();
+                    } else {
+                        HbarArray[pi].sortedbar();
+                        HbarArray[j - 1].sortedbar();
+                        partition(start, end, pi);
+                    }
+                } else {
+                    j++;
+                    if (j < end) {
+                        console.log("calling quick interval 3");
+                        quickInterval();
+                    } else {
+                        HbarArray[pi].sortedbar();
+                        HbarArray[j - 1].sortedbar();
+                        partition(start, end, pi);
+                    }
+                }
+            } else if (fnum > HbarArray[pi]._hg) {
+                if (isGreaterFound) {
+
+                    HbarArray[j].mark();
+                    posbx = HbarArray[j]._x;
+
+                    if (posax < posbx) {
+                        console.log("true swap");
+                    } else {
+                        console.log("false swap");
+                    }
+
+                    let index = HbarArray[gi]._index;
+                    HbarArray[gi]._index = HbarArray[j]._index;
+                    HbarArray[j]._index = index;
+
+                    const Id = setInterval(() => {
+                        UpdateCanvasArea();
+                        HbarArray[gi].moveTo(posbx, Id);
+
+                        if (HbarArray[gi]._x !== posbx) {
+                            chmoda = false;
+                        } else {
+                            chmoda = true;
+                            clearInterval(Id);
+                        }
+
+                    }, time);
+
+                    const Id2 = setInterval(() => {
+                        UpdateCanvasArea();
+                        HbarArray[j].moveFrom(posax, Id2);
+
+                        if (HbarArray[j]._x !== posax) {
+                            chmodb = false;
+                        } else {
+                            chmodb = true;
+                            clearInterval(Id2);
+                        }
+
+                    }, time);
+
+                    const timeoutfunc = setInterval(() => {
+
+                        if (chmoda && chmodb) {
+
+                            let obj = HbarArray[gi];
+                            HbarArray[gi] = HbarArray[j];
+                            HbarArray[j] = obj;
+
+                            // HbarArray[gi].unmark();
+                            // HbarArray[j].unmark();
+
+                            isGreaterFound = false;
+
+                            if (j !== pi) {
+                                j = gi;
+                                j++;
+                                if (j < end) {
+                                    console.log("calling quick interval 4");
+                                    quickInterval();
+                                } else {
+                                    HbarArray[pi].sortedbar();
+                                    HbarArray[j - 1].sortedbar();
+                                    partition(start, end, pi);
+                                }
+                            } else {
+                                HbarArray[pi].sortedbar();
+                                pi = gi;
+                                HbarArray[pi].sortedbar();
+                                isFinished = true;
+                                partition(start, end, pi);
+                            }
+
+                            clearInterval(timeoutfunc);
+                        }
+
+                    }, time);
+                } else {
+                    j++;
+                    if (j < end) {
+                        console.log("calling quick interval 5");
+                        quickInterval();
+                    } else {
+                        HbarArray[pi].sortedbar();
+                        HbarArray[j - 1].sortedbar();
+                        partition(start, end, pi);
+                    }
+                }
+            } else if (fnum == HbarArray[pi]._hg) {
+                if (isGreaterFound) {
+
+                    console.log("==========");
+
+                    HbarArray[j].mark();
+
+                    posbx = HbarArray[j]._x;
+
+                    let index = HbarArray[gi]._index;
+                    HbarArray[gi]._index = HbarArray[j]._index;
+                    HbarArray[j]._index = index;
+
+                    chmoda = false;
+                    chmodb = false;
+
+                    const Id = setInterval(() => {
+                        UpdateCanvasArea();
+                        HbarArray[gi].moveTo(posbx, Id);
+
+                        if (HbarArray[gi]._x !== posbx) {
+                            chmoda = false;
+                        } else {
+                            chmoda = true;
+                            // alert("srtopa ");
+                            UpdateCanvasArea();
+                            clearInterval(Id);
+                        }
+
+                    }, time);
+
+                    const Id2 = setInterval(() => {
+                        UpdateCanvasArea();
+                        HbarArray[j].moveFrom(posax, Id2);
+
+                        if (HbarArray[j]._x !== posax) {
+                            chmodb = false;
+                        } else {
+                            chmodb = true;
+                            UpdateCanvasArea();
+                            // alert("srtopb ");
+                            clearInterval(Id2);
+                        }
+
+                    }, time);
+
+                    const timeoutfunc = setInterval(() => {
+
+                        if (chmoda && chmodb) {
+
+                            clearInterval(timeoutfunc);
+
+                            // alert("stop swap");
+
+                            let obj = HbarArray[gi];
+                            HbarArray[gi] = HbarArray[j];
+                            HbarArray[j] = obj;
+
+                            isGreaterFound = false;
+                            //pi = gi;
+
+                            if (j !== pi) {
+
+                                j = gi;
+                                j++;
+                                if (j < end) {
+                                    console.log("calling quick interval 6");
+                                    quickInterval();
+                                } else {
+                                    HbarArray[pi].sortedbar();
+                                    HbarArray[j - 1].sortedbar();
+                                    partition(start, end, pi);
+                                }
+                            } else {
+                                // alert("okkssy");
+                                console.log("===");
+                                HbarArray[pi].sortedbar();
+                                pi = gi;
+                                HbarArray[pi].sortedbar();
+                                isFinished = true;
+                                // isGreaterFound = true;
+
+                                partition(start, end, pi);
+                            }
+
+                        }
+
+                    }, time);
+
+                } else {
+                    if (true) {
+                        HbarArray[pi].sortedbar();
+                        isFinished = true;
+                        partition(start, end, pi);
+                    }
+                }
+            } else {
+                HbarArray[pi].sortedbar();
+                isFinished = true;
+                partition(start, end, pi);
+            }
+        }
+
+        const isFinishedIntervalFunc = setInterval(() => {
+            if (isFinished) {
+                SortVectorStatus.pop();
+                clearInterval(isFinishedIntervalFunc);
+                return true;
+            }
+        }, time);
+
+        quickInterval();
+    }
+
+    partition(init_start, init_end, init_end);
+}
