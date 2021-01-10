@@ -1316,3 +1316,273 @@ const QuickSort = (init_start, init_end) => {
 
     partition(init_start, init_end, init_end);
 }
+
+const quickSort = (init_start, init_end) => {
+  IsBubbleSorted = false;
+  FinalSortedConfig = false;
+  let SortVectorStatus = [];
+
+  const partition = (start, end, pi) => {
+    let sorted = false;
+    let a = pi - start;
+    let b = end - (pi + 1);
+
+    if (a > 1) {
+      SortVectorStatus.push("IsSorting");
+      try {
+        sorted = sort(start, pi);
+      } catch (error) {}
+    } else {
+      sorted = true;
+    }
+
+    if (b > 1) {
+      SortVectorStatus.push("IsSorting");
+      try {
+        let obvalue = sort(pi + 1, end);
+      } catch (error) {}
+    }
+
+    if (a <= 1 && b <= 1) {
+      HbarArray[start].sortedbar();
+      HbarArray[pi].sortedbar();
+    }
+  };
+
+  const checkVectorStatus = setInterval(() => {
+    if (SortVectorStatus.length == 0 && !FinalSortedConfig) {
+      FinalSortedConfig = true;
+
+      for (let i = 0; i < init_end; i++) {
+        HbarArray[i].sortedbar();
+      }
+
+      clearInterval(checkVectorStatus);
+
+      IsBubbleSorted = true;
+    }
+  }, 0);
+
+  const sort = (start, end) => {
+    let isFinished = false;
+    let j = start;
+    let pi = end - 1;
+    let isGreaterFound = false;
+    let posax = 0;
+    let posbx = 0;
+    let gi;
+
+    HbarArray[pi].misplaced();
+
+    const quickInterval = () => {
+      let chmoda = false;
+      let chmodb = false;
+
+      let fnum = HbarArray[j]._hg;
+
+      if (fnum < HbarArray[pi]._hg) {
+        if (!isGreaterFound) {
+          gi = j;
+          posax = HbarArray[j]._x;
+          isGreaterFound = true;
+          HbarArray[j].mark();
+
+          j++;
+          if (j < end) {
+            try {
+              quickInterval();
+            } catch (error) {}
+          } else {
+            HbarArray[pi].sortedbar();
+            HbarArray[j - 1].sortedbar();
+            partition(start, end, pi);
+          }
+        } else {
+          j++;
+          if (j < end) {
+            try {
+              quickInterval();
+            } catch (error) {}
+          } else {
+            HbarArray[pi].sortedbar();
+            HbarArray[j - 1].sortedbar();
+            partition(start, end, pi);
+          }
+        }
+      } else if (fnum > HbarArray[pi]._hg) {
+        if (isGreaterFound) {
+          HbarArray[j].mark();
+          posbx = HbarArray[j]._x;
+
+          let index = HbarArray[gi]._index;
+          HbarArray[gi]._index = HbarArray[j]._index;
+          HbarArray[j]._index = index;
+
+          const Id = setInterval(() => {
+            UpdateCanvasArea();
+            HbarArray[gi].moveTo(posbx, Id);
+
+            if (HbarArray[gi]._x !== posbx) {
+              chmoda = false;
+            } else {
+              chmoda = true;
+              clearInterval(Id);
+            }
+          }, time);
+
+          const Id2 = setInterval(() => {
+            UpdateCanvasArea();
+            HbarArray[j].moveFrom(posax, Id2);
+
+            if (HbarArray[j]._x !== posax) {
+              chmodb = false;
+            } else {
+              chmodb = true;
+              clearInterval(Id2);
+            }
+          }, time);
+
+          const timeoutfunc = setInterval(() => {
+            if (chmoda && chmodb) {
+              let obj = HbarArray[gi];
+              HbarArray[gi] = HbarArray[j];
+              HbarArray[j] = obj;
+
+              // HbarArray[gi].unmark();
+              // HbarArray[j].unmark();
+
+              isGreaterFound = false;
+
+              if (j !== pi) {
+                j = gi;
+                j++;
+                if (j < end) {
+                  try {
+                    quickInterval();
+                  } catch (error) {}
+                } else {
+                  HbarArray[pi].sortedbar();
+                  HbarArray[j - 1].sortedbar();
+                  partition(start, end, pi);
+                }
+              } else {
+                HbarArray[pi].sortedbar();
+                pi = gi;
+                HbarArray[pi].sortedbar();
+                isFinished = true;
+                partition(start, end, pi);
+              }
+
+              clearInterval(timeoutfunc);
+            }
+          }, time);
+        } else {
+          j++;
+          if (j < end) {
+            try {
+              try {
+                quickInterval();
+              } catch (error) {}
+            } catch (error) {}
+          } else {
+            HbarArray[pi].sortedbar();
+            HbarArray[j - 1].sortedbar();
+            partition(start, end, pi);
+          }
+        }
+      } else if (fnum == HbarArray[pi]._hg) {
+        if (isGreaterFound) {
+          HbarArray[j].mark();
+
+          posbx = HbarArray[j]._x;
+
+          let index = HbarArray[gi]._index;
+          HbarArray[gi]._index = HbarArray[j]._index;
+          HbarArray[j]._index = index;
+
+          const Id = setInterval(() => {
+            UpdateCanvasArea();
+            HbarArray[gi].moveTo(posbx, Id);
+
+            if (HbarArray[gi]._x !== posbx) {
+              chmoda = false;
+            } else {
+              chmoda = true;
+              clearInterval(Id);
+            }
+          }, time);
+
+          const Id2 = setInterval(() => {
+            UpdateCanvasArea();
+            HbarArray[j].moveFrom(posax, Id2);
+
+            if (HbarArray[j]._x !== posax) {
+              chmodb = false;
+            } else {
+              chmodb = true;
+              clearInterval(Id2);
+            }
+          }, time);
+
+          const timeoutfunc = setInterval(() => {
+            if (chmoda && chmodb) {
+              let obj = HbarArray[gi];
+              HbarArray[gi] = HbarArray[j];
+              HbarArray[j] = obj;
+
+              // HbarArray[gi].unmark();
+              // HbarArray[j].unmark();
+
+              isGreaterFound = false;
+
+              if (j !== pi) {
+                j = gi;
+                j++;
+                if (j < end) {
+                  try {
+                    quickInterval();
+                  } catch (error) {}
+                } else {
+                  HbarArray[pi].sortedbar();
+                  HbarArray[j - 1].sortedbar();
+                  partition(start, end, pi);
+                }
+              } else {
+                HbarArray[pi].sortedbar();
+                pi = gi;
+                HbarArray[pi].sortedbar();
+                isFinished = true;
+
+                partition(start, end, pi);
+              }
+
+              clearInterval(timeoutfunc);
+            }
+          }, time);
+        } else {
+          if (true) {
+            HbarArray[pi].sortedbar();
+            isFinished = true;
+            partition(start, end, pi);
+          }
+        }
+      } else {
+        HbarArray[pi].sortedbar();
+        isFinished = true;
+        partition(start, end, pi);
+      }
+    };
+
+    const isFinishedIntervalFunc = setInterval(() => {
+      if (isFinished) {
+        SortVectorStatus.pop();
+        clearInterval(isFinishedIntervalFunc);
+        return true;
+      }
+    }, time);
+
+    quickInterval();
+  };
+
+  partition(init_start, init_end, init_end);
+};
