@@ -14,7 +14,6 @@ class NavigatorObject {
     this.context = navigator.getContext("2d");
 
     this._width = 350;
-    //canvas.style.margin = "auto";
     this._height = 250;
 
     navigator.width = this._width;
@@ -22,8 +21,6 @@ class NavigatorObject {
     navigator.style.backgroundColor = "#fff";
     navigator.style.opacity = 0.8;
 
-    // this.SortSpeed = 10;
-    // console.log("created navigator");
   }
 
   clear() {
@@ -197,14 +194,6 @@ class ComponentHBar {
                     this.display();
                 } else {
 
-                    // UpdateCanvasArea();
-                    //console.log("2nd : " + this._x + " width fac : " + this._wd);
-                    // if (!template) {
-                    //     this._x -= 10;
-                    // }
-
-                    // this.display();
-
                     clearInterval(unshrink);
                 }
 
@@ -213,10 +202,7 @@ class ComponentHBar {
     }
 
     moveTo(destinationX, inter) {
-        //this.resize(true);
-
-        //let leftbox = destinationX + (this._var * 2 * (this.rs ** 2));
-
+       
         if (Math.ceil(this._x) == Math.floor(destinationX)) {
             this._x = destinationX;
 
@@ -224,31 +210,14 @@ class ComponentHBar {
             UpdateCanvasArea();
             fswap = true;
             clearInterval(inter);
-            // console.log("Stop to");
-
-
-            //this._x += this.speed;
-            //this.unsize(destinationX, true);
 
         } else {
-            //let nextX = this._x + this.speed;
-
-            //this._x += this.speed;
-            // console.log("thisX " + this._x + ", dest " + destinationX);
-
+            
             let nextX = this._x + this.speed;
 
-
-
-            //this._x -= this.speed;
             if (nextX > destinationX) {
-                // console.log("nextX " + nextX + " " + destinationX);
                 let lp = Math.floor(nextX - destinationX);
-                // console.log("this x:" + this._x + ", dest: " + destinationX + ", nextX: " + nextX + ", lp: " + lp);
                 this._x = destinationX;
-                //this._x = Math.ceil(this._x);
-                // console.log(this._x + ",== " + destinationX + " speed " + this.speed);
-                // console.log(this._x + ", " + destinationX);
                 clearInterval(inter);
                 this.unmark();
                 UpdateCanvasArea();
@@ -264,36 +233,23 @@ class ComponentHBar {
     }
 
     moveFrom(destinationX, inter) {
-        //this.resize(false);
-
-        //let leftbox = destinationX - (this._var * 2 * (this.rs ** 2));
-
+        
         if (this.isResized) {
 
             if (Math.ceil(this._x) == Math.floor(destinationX)) {
                 this._x = destinationX;
-                //console.log("lfbx : " + leftbox);
                 clearInterval(inter);
                 this.unmark();
                 UpdateCanvasArea();
                 lswap = true;
-                // console.log("Stop from");
-
-                //this._x -= this.speed;
-                //this.unsize(destinationX, false);
 
             } else {
                 let nextX = this._x - this.speed;
 
-                //this._x -= this.speed;
                 if (nextX < destinationX) {
-                    // console.log("configurfation settings");
                     let lp = Math.ceil(destinationX - nextX);
-                    // console.log("this x:" + this._x + ", dest: " + destinationX + ", nextX: " + nextX + ", lp: " + lp);
                     this._x = destinationX;
-                    //this._x = Math.floor(this._x);
-                    // console.log(this._x + ",== " + destinationX);
-
+                    
                     this.unmark();
                     UpdateCanvasArea();
                     lswap = true;
@@ -337,7 +293,6 @@ var ViewFromHeap = false;
 let halves = HbarArray.length;
 
 const GenerateNewArray = () => {
-  //location.reload();
 
   ShiftedBars = [];
   fswap = false;
@@ -356,7 +311,6 @@ const GenerateNewArray = () => {
   ViewFromHeap = false;
 
   ViewIndex = 0;
-  // ViewFromHeap = false;
 
   FinalSortedConfig = false;
 
@@ -371,7 +325,6 @@ const GenerateNewArray = () => {
       Math.floor(hbarwidith * 0.5) -
       hbarwidith * Math.floor(n * 0.5) +
       hbarwidith * i; // - (gap * i);
-    //console.log(xcoord);
     HbarArray.push(new ComponentHBar(xcoord, 0, hbarwidith, ylength, i));
   }
 
@@ -392,7 +345,6 @@ generateNewArrayBtn.onclick = () => {
 GenerateNewArray();
 
 window.addEventListener("resize", () => {
-  // alert("resized");
   canvas.Canvas.width = window.innerWidth;
   canvas.Canvas.height = window.innerHeight;
   canvas._width = window.innerWidth;
@@ -400,13 +352,12 @@ window.addEventListener("resize", () => {
 
   midpoint = canvas._width * 0.5;
 
-  //UpdateCanvasArea();
 
   GenerateNewArray();
 });
 
 const StartBubbleSort = (HbarArray, start, end) => {
-  // j = start;
+  
   let go = true;
   let posax = 0;
   let posbx = 0;
@@ -460,15 +411,12 @@ const StartBubbleSort = (HbarArray, start, end) => {
           fswap = false;
           HbarArray[j].sortedbar();
           i++;
-          // size = HbarArray.length - traversed;
           j = start;
           StartBubbleSort(HbarArray, start, end);
         } else {
-          console.log("sorted there");
-          console.log("j is " + j);
+          
           j = start;
-          // i = 0;
-          console.log("j is " + j + " and end is " + end + " and i is : " + i);
+        
           traversed = 0;
           CurrentPosition = 0;
           size = HbarArray.length;
@@ -484,12 +432,10 @@ const StartBubbleSort = (HbarArray, start, end) => {
       lswap = false;
       fswap = false;
 
-      // StartBubbleSort(HbarArray, start, end);
       if (go) {
         try {
           StartBubbleSort(HbarArray, start, end);
         } catch (error) {
-          // alert("endddxxx j:" + j + " size: " + end);
           for (let i = 0; i < HbarArray.length; i++) {
             HbarArray[i].sortedbar();
           }
@@ -504,17 +450,14 @@ const StartBubbleSort = (HbarArray, start, end) => {
     } else if (i < end) {
       HbarArray[j].sortedbar();
       i++;
-      // size = HbarArray.length - traversed;
       j = start;
       lswap = false;
       fswap = false;
       StartBubbleSort(HbarArray, start, end);
     } else {
-      // alert("enddd");
-      console.log("sorted here");
+      
       j = start;
-      // i = 0;
-      console.log("j is " + j + " and end is " + end + " and i is : " + i);
+      
       HbarArray[j].sortedbar();
       HbarArray[j + 1].sortedbar();
       traversed = 0;
@@ -531,10 +474,7 @@ bubbleSortBtn.onclick = () => {
 
 const StartHeapSort = () => {
   IsHeapSorting = true;
-  //console.log("Current Position is: " + CurrentPosition);
   let parentposition = Math.ceil(CurrentPosition * 0.5) - 1;
-
-  //console.log("Parent Position is: " + parentposition);
 
   let posax = Math.floor(HbarArray[CurrentPosition]._x);
   let posbx = Math.floor(HbarArray[parentposition]._x);
@@ -548,7 +488,6 @@ const StartHeapSort = () => {
     let lp = HbarArray[CurrentPosition]._index;
     HbarArray[CurrentPosition]._index = HbarArray[parentposition]._index;
     HbarArray[parentposition]._index = lp;
-    //let parentposition = (Math.floor((CurrentPosition + 1) * 0.5)) - 1;
 
     const intervalId = setInterval(() => {
       UpdateCanvasArea();
@@ -563,7 +502,6 @@ const StartHeapSort = () => {
     const timeoutfunc = setInterval(() => {
       if (lswap && fswap) {
         HbarArray[CurrentPosition].unmark();
-        //HbarArray[parentposition].unmark();
 
         let leftobj = HbarArray[CurrentPosition];
         HbarArray[CurrentPosition] = HbarArray[parentposition];
@@ -576,19 +514,13 @@ const StartHeapSort = () => {
         CurrentPosition++;
 
         if (parentposition == 0) {
-          //CurrentPosition++;
           lswap = false;
           fswap = false;
 
           try {
             StartHeapSort();
           } catch (error) {
-            console.log(
-              "CurrentPosition is : " +
-                CurrentPosition +
-                ", length: " +
-                HbarArray.length
-            );
+            
             clearInterval(timeoutfunc);
           }
         } else if (traversed < size - 1 && CurrentPosition < HbarArray.length) {
@@ -599,12 +531,7 @@ const StartHeapSort = () => {
           try {
             StartHeapSort();
           } catch (error) {
-            console.log(
-              "CurrentPosition is : " +
-                CurrentPosition +
-                ", length: " +
-                HbarArray.length
-            );
+            
             clearInterval(timeoutfunc);
           }
         } else if (traversed < size - 1) {
@@ -619,23 +546,16 @@ const StartHeapSort = () => {
             HbarArray[a]._index = a;
           }
 
-          console.log("shifted bar size: " + ShiftedBars.length);
 
           lswap = false;
           fswap = false;
           try {
             StartHeapSort();
           } catch (error) {
-            console.log(
-              "CurrentPosition is : " +
-                CurrentPosition +
-                ", length: " +
-                HbarArray.length
-            );
+            
             clearInterval(timeoutfunc);
           }
         } else {
-          // alert("sorted");
           lswap = false;
           fswap = false;
           HbarArray[CurrentPosition - 1].sortedbar();
@@ -648,23 +568,16 @@ const StartHeapSort = () => {
     }, time);
   } else {
     HbarArray[CurrentPosition].unmark();
-    //HbarArray[parentposition].unmark();
 
     CurrentPosition++;
 
     if (traversed < size - 1 && CurrentPosition < HbarArray.length) {
-      //CurrentPosition = parentposition;
       lswap = false;
       fswap = false;
       try {
         StartHeapSort();
       } catch (error) {
-        console.log(
-          "CurrentPosition is : " +
-            CurrentPosition +
-            ", length: " +
-            HbarArray.length
-        );
+        
       }
     } else if (traversed < size - 1) {
       traversed++;
@@ -678,21 +591,14 @@ const StartHeapSort = () => {
         HbarArray[a]._index = a;
       }
 
-      console.log("shifted bar size: " + ShiftedBars.length);
       lswap = false;
       fswap = false;
       try {
         StartHeapSort();
       } catch (error) {
-        console.log(
-          "CurrentPosition is : " +
-            CurrentPosition +
-            ", length: " +
-            HbarArray.length
-        );
+        
       }
     } else {
-      alert("sorted");
       HbarArray[CurrentPosition - 1].sortedbar();
       lswap = false;
       fswap = false;
@@ -708,7 +614,6 @@ heapSortBtn.onclick = function () {
   CurrentPosition = 1;
   lswap = false;
   fswap = false;
-  // ViewFromHeap = true;
   StartHeapSort();
 };
 
@@ -1613,26 +1518,19 @@ mergeSortBtn.onclick = function () {
 
     const checkSortFinish = setInterval(() => {
       if (IsBubbleSorted) {
-        // alert("bsort");
         if (len == HbarArray.length) {
-          console.log("halves : " + halves);
-          // let breakpoint = Math.floor(HbarArray.length * 0.5) - 1;
           halves = Math.floor(HbarArray.length / jump);
 
           if (halves > 1) {
-            // alert("new parse");
-            console.log("halves : " + halves);
-
+            
             jump *= 2;
             j = 0;
             i = 0;
             len = j + jump;
 
             try {
-              console.log("caling msort 1");
               MergeFunction();
             } catch (error) {
-              console.log("Merge Error");
             }
           } else {
             for (let i = 0; i < HbarArray.length; i++) {
@@ -1656,10 +1554,8 @@ mergeSortBtn.onclick = function () {
           i = 0;
 
           try {
-            console.log("caling msort 2");
             MergeFunction();
           } catch (error) {
-            console.log("Merge Error");
           }
         }
       }
@@ -1667,11 +1563,9 @@ mergeSortBtn.onclick = function () {
   };
 
   try {
-    console.log("caling msort 3");
     MergeFunction();
   } catch (error) {
     UpdateCanvasArea();
-    console.log("Merge Error");
   }
 };
 
