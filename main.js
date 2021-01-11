@@ -1586,3 +1586,95 @@ const quickSort = (init_start, init_end) => {
 
   partition(init_start, init_end, init_end);
 };
+
+mergeSortBtn.onclick = function () {
+  let IsMergeSorted = 0;
+
+  const MergeFunction = () => {
+    IsBubbleSorted = false;
+
+    let scp = HbarArray.length - j;
+
+    if (len > HbarArray.length) {
+      len = HbarArray.length;
+    } else if (len + jump > HbarArray.length) {
+      len = HbarArray.length;
+    }
+
+    if (halves > 1) {
+      quickSort(j, len);
+    }
+
+    UpdateCanvasArea();
+
+    for (let i = 0; i < HbarArray.length; i++) {
+      HbarArray[i].sortedbar();
+    }
+
+    const checkSortFinish = setInterval(() => {
+      if (IsBubbleSorted) {
+        // alert("bsort");
+        if (len == HbarArray.length) {
+          console.log("halves : " + halves);
+          // let breakpoint = Math.floor(HbarArray.length * 0.5) - 1;
+          halves = Math.floor(HbarArray.length / jump);
+
+          if (halves > 1) {
+            // alert("new parse");
+            console.log("halves : " + halves);
+
+            jump *= 2;
+            j = 0;
+            i = 0;
+            len = j + jump;
+
+            try {
+              console.log("caling msort 1");
+              MergeFunction();
+            } catch (error) {
+              console.log("Merge Error");
+            }
+          } else {
+            for (let i = 0; i < HbarArray.length; i++) {
+              HbarArray[i].sortedbar();
+            }
+
+            clearInterval(checkSortFinish);
+            IsBubbleSorted = false;
+
+            time = 50;
+            MergeBubbleSort(HbarArray, j, len);
+
+            UpdateCanvasArea();
+          }
+        } else {
+          clearInterval(checkSortFinish);
+          j += jump;
+
+          len = len + jump;
+
+          i = 0;
+
+          try {
+            console.log("caling msort 2");
+            MergeFunction();
+          } catch (error) {
+            console.log("Merge Error");
+          }
+        }
+      }
+    }, time);
+  };
+
+  try {
+    console.log("caling msort 3");
+    MergeFunction();
+  } catch (error) {
+    UpdateCanvasArea();
+    console.log("Merge Error");
+  }
+};
+
+quickSortBtn.onclick = function () {
+  QuickSort(0, HbarArray.length);
+};
