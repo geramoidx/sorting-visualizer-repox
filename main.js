@@ -639,8 +639,6 @@ slider.oninput = () => {
   i = 0;
   j = 0;
   len = j + jump;
-  // GeneralSpeed = 1;
-  console.log("jump " + jump);
 
   hbarwidith = maxWidth - parseInt(range) * ((maxWidth - minWidth) / 100);
 
@@ -667,7 +665,6 @@ document.getElementById("canvas").addEventListener("mousemove", (event) => {
   let y = event.offsetY;
 
   let found = false;
-  //let i = 0;
   let min = HbarArray[0]._x;
   let max = HbarArray[HbarArray.length - 1]._x;
   let closest;
@@ -680,12 +677,12 @@ document.getElementById("canvas").addEventListener("mousemove", (event) => {
       let nx = ShiftedBars[j]._x;
 
       if (Math.abs(x - nx) < hbarwidith) {
-        // console.log("found");
+        
         closest = ShiftedBars[j];
         ViewIndex = ShiftedBars[j]._index;
         foundInHeap = true;
         ViewFromHeap = true;
-        // window.alert("found in heap");
+        
         j = ShiftedBars.length;
       } else {
         j++;
@@ -696,19 +693,15 @@ document.getElementById("canvas").addEventListener("mousemove", (event) => {
       return;
     }
   }
-  //console.log("array length is " + HbarArray.length);
 
   for (let i = 0; i < HbarArray.length && !found; ) {
     let nx = HbarArray[i]._x;
-    //console.log(nx);
     if (Math.abs(x - nx) < hbarwidith) {
-      // console.log("found");
       closest = HbarArray[i];
       ViewIndex = HbarArray[i]._index;
       found = true;
       i = HbarArray.length;
     } else {
-      // console.log("not found");
       i++;
     }
   }
@@ -745,14 +738,11 @@ const CameraView = setInterval(() => {
       if (view >= ShiftedBars.length) {
         barlapse = view;
         let ylength = 400;
-        // let ylength = Math.floor(Math.random() * (max - min)) + min;
         let xcoord =
           navigator._width * 0.5 -
           Math.floor(bar * 0.5) -
           bar * Math.floor(5 * 0.5) +
-          bar * i; // - (gap * i);
-        //console.log(xcoord);
-        //HbarArray.push(new ComponentHBar(xcoord, 0, hbarwidith, ylength));
+          bar * i; 
         ctxnav.fillStyle = HbarArray[view - barlapse].color;
         ctxnav.fillRect(xcoord, 30, bar, ylength);
         ctxnav.strokeStyle = "#ffb";
@@ -768,14 +758,11 @@ const CameraView = setInterval(() => {
         );
       } else {
         let ylength = 400;
-        // let ylength = Math.floor(Math.random() * (max - min)) + min;
         let xcoord =
           navigator._width * 0.5 -
           Math.floor(bar * 0.5) -
           bar * Math.floor(5 * 0.5) +
-          bar * i; // - (gap * i);
-        //console.log(xcoord);
-        //HbarArray.push(new ComponentHBar(xcoord, 0, hbarwidith, ylength));
+          bar * i; 
         ctxnav.fillStyle = ShiftedBars[view].color;
         ctxnav.fillRect(xcoord, 30, bar, ylength);
         ctxnav.strokeStyle = "#ffb";
@@ -793,14 +780,11 @@ const CameraView = setInterval(() => {
 
   for (let i = 0; i < 5; i++) {
     let ylength = 400;
-    // let ylength = Math.floor(Math.random() * (max - min)) + min;
     let xcoord =
       navigator._width * 0.5 -
       Math.floor(bar * 0.5) -
       bar * Math.floor(5 * 0.5) +
-      bar * i; // - (gap * i);
-    //console.log(xcoord);
-    //HbarArray.push(new ComponentHBar(xcoord, 0, hbarwidith, ylength));
+      bar * i; 
     ctxnav.fillStyle = HbarArray[view].color;
     ctxnav.fillRect(xcoord, 30, bar, ylength);
     ctxnav.strokeStyle = "#ffb";
