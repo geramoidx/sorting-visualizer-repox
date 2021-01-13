@@ -800,7 +800,6 @@ const CameraView = setInterval(() => {
 }, 100);
 
 const MergeBubbleSort = (HbarArray, start, end) => {
-  // j = start;
   let posax = Math.floor(HbarArray[j]._x);
   let posbx = Math.floor(HbarArray[j + 1]._x);
 
@@ -838,26 +837,24 @@ const MergeBubbleSort = (HbarArray, start, end) => {
           try {
             StartBubbleSort(HbarArray, start, end);
           } catch (error) {
-            alert("sorted ienixxnd");
+            
           }
         } else if (i < end) {
           lswap = false;
           fswap = false;
           HbarArray[j].sortedbar();
           i++;
-          // size = HbarArray.length - traversed;
+          
           j = start;
           try {
             StartBubbleSort(HbarArray, start, end);
           } catch (error) {
-            // alert("sorted ienaaaaind");
+            
           }
         } else {
-          console.log("sorted there");
-          console.log("j is " + j);
+          
           j = start;
-          // i = 0;
-          console.log("j is " + j + " and end is " + end + " and i is : " + i);
+          
           traversed = 0;
           CurrentPosition = 0;
           size = HbarArray.length;
@@ -875,26 +872,24 @@ const MergeBubbleSort = (HbarArray, start, end) => {
       try {
         StartBubbleSort(HbarArray, start, end);
       } catch (error) {
-        // alert("sorted ienind");
+        
       }
     } else if (i < end) {
       HbarArray[j].sortedbar();
       i++;
-      // size = HbarArray.length - traversed;
+      
       j = start;
       lswap = false;
       fswap = false;
       try {
         StartBubbleSort(HbarArray, start, end);
       } catch (error) {
-        // alert("end herer");
+        
       }
     } else {
-      console.log("sorted here");
-      // alert("sorted");
+      
       j = start;
-      // i = 0;
-      console.log("j is " + j + " and end is " + end + " and i is : " + i);
+      
       HbarArray[j].sortedbar();
       HbarArray[j + 1].sortedbar();
       traversed = 0;
@@ -918,7 +913,6 @@ const QuickSort = (init_start, init_end) => {
 
         if (a > 1) {
             SortVectorStatus.push("IsSorting");
-            // console.log("caling fsort pi : " + pi + ", start: " + start);
             sorted = sort(start, pi);
         } else {
             sorted = true;
@@ -926,7 +920,6 @@ const QuickSort = (init_start, init_end) => {
 
         if (b > 1) {
             SortVectorStatus.push("IsSorting");
-            // console.log("caling lsort pi : " + (pi + 1) + ", start: " + end);
             let obvalue = sort(pi + 1, end);
         }
 
@@ -966,7 +959,6 @@ const QuickSort = (init_start, init_end) => {
 
         const quickInterval = () => {
 
-            // console.log("calling quick interval 1");
             let chmoda = false;
             let chmodb = false;
 
@@ -982,7 +974,6 @@ const QuickSort = (init_start, init_end) => {
 
                     j++;
                     if (j < end) {
-                        console.log("calling quick interval 2");
                         quickInterval();
                     } else {
                         HbarArray[pi].sortedbar();
@@ -992,7 +983,6 @@ const QuickSort = (init_start, init_end) => {
                 } else {
                     j++;
                     if (j < end) {
-                        console.log("calling quick interval 3");
                         quickInterval();
                     } else {
                         HbarArray[pi].sortedbar();
@@ -1007,9 +997,7 @@ const QuickSort = (init_start, init_end) => {
                     posbx = HbarArray[j]._x;
 
                     if (posax < posbx) {
-                        console.log("true swap");
                     } else {
-                        console.log("false swap");
                     }
 
                     let index = HbarArray[gi]._index;
@@ -1050,16 +1038,12 @@ const QuickSort = (init_start, init_end) => {
                             HbarArray[gi] = HbarArray[j];
                             HbarArray[j] = obj;
 
-                            // HbarArray[gi].unmark();
-                            // HbarArray[j].unmark();
-
                             isGreaterFound = false;
 
                             if (j !== pi) {
                                 j = gi;
                                 j++;
                                 if (j < end) {
-                                    console.log("calling quick interval 4");
                                     quickInterval();
                                 } else {
                                     HbarArray[pi].sortedbar();
@@ -1081,7 +1065,6 @@ const QuickSort = (init_start, init_end) => {
                 } else {
                     j++;
                     if (j < end) {
-                        console.log("calling quick interval 5");
                         quickInterval();
                     } else {
                         HbarArray[pi].sortedbar();
@@ -1091,8 +1074,6 @@ const QuickSort = (init_start, init_end) => {
                 }
             } else if (fnum == HbarArray[pi]._hg) {
                 if (isGreaterFound) {
-
-                    console.log("==========");
 
                     HbarArray[j].mark();
 
@@ -1113,7 +1094,7 @@ const QuickSort = (init_start, init_end) => {
                             chmoda = false;
                         } else {
                             chmoda = true;
-                            // alert("srtopa ");
+                            
                             UpdateCanvasArea();
                             clearInterval(Id);
                         }
@@ -1129,7 +1110,7 @@ const QuickSort = (init_start, init_end) => {
                         } else {
                             chmodb = true;
                             UpdateCanvasArea();
-                            // alert("srtopb ");
+                            
                             clearInterval(Id2);
                         }
 
@@ -1141,21 +1122,17 @@ const QuickSort = (init_start, init_end) => {
 
                             clearInterval(timeoutfunc);
 
-                            // alert("stop swap");
-
                             let obj = HbarArray[gi];
                             HbarArray[gi] = HbarArray[j];
                             HbarArray[j] = obj;
 
                             isGreaterFound = false;
-                            //pi = gi;
 
                             if (j !== pi) {
 
                                 j = gi;
                                 j++;
                                 if (j < end) {
-                                    console.log("calling quick interval 6");
                                     quickInterval();
                                 } else {
                                     HbarArray[pi].sortedbar();
@@ -1163,13 +1140,11 @@ const QuickSort = (init_start, init_end) => {
                                     partition(start, end, pi);
                                 }
                             } else {
-                                // alert("okkssy");
-                                console.log("===");
+                                
                                 HbarArray[pi].sortedbar();
                                 pi = gi;
                                 HbarArray[pi].sortedbar();
                                 isFinished = true;
-                                // isGreaterFound = true;
 
                                 partition(start, end, pi);
                             }
