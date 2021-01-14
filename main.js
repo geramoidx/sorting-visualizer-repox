@@ -1312,9 +1312,6 @@ const quickSort = (init_start, init_end) => {
               HbarArray[gi] = HbarArray[j];
               HbarArray[j] = obj;
 
-              // HbarArray[gi].unmark();
-              // HbarArray[j].unmark();
-
               isGreaterFound = false;
 
               if (j !== pi) {
@@ -1393,9 +1390,6 @@ const quickSort = (init_start, init_end) => {
               let obj = HbarArray[gi];
               HbarArray[gi] = HbarArray[j];
               HbarArray[j] = obj;
-
-              // HbarArray[gi].unmark();
-              // HbarArray[j].unmark();
 
               isGreaterFound = false;
 
