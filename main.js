@@ -60,10 +60,9 @@ class CanvasObject {
     this.context = document.getElementById("canvas").getContext("2d");
 
     this._width = window.innerWidth;
-    //canvas.style.margin = "auto";
+    
     this._height = window.innerHeight;
 
-    // canvas.width = this._width;
     this.Canvas.width = window.innerWidth;
     this.Canvas.height = window.innerHeight;
 
@@ -630,11 +629,9 @@ slider.oninput = () => {
   n = minNum + parseInt(range) * ((maxNum - minNum) / 100);
 
   time = 80 - parseInt(range) * (80 / 100);
-  // time = 0;
-  // console.log("time is " + time);
 
   GeneralSpeed = 10 + parseInt(range) * ((500 - 10) / 100);
-  // jump = 2;
+  
   jump = 2 + Math.floor(parseInt(range) * ((10 - 2) / 100));
   i = 0;
   j = 0;
