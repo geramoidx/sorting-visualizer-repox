@@ -1,3 +1,4 @@
+// document query selectors for ui controllers - slider, buttons, conditions
 var slider = document.getElementById("myRange");
 var generateNewArrayBtn = document.getElementById("newArray");
 var bubbleSortBtn = document.getElementById("bubbleSort");
@@ -7,6 +8,7 @@ var quickSortBtn = document.getElementById("quickSort");
 var IsHeapSorting = false;
 var IsBubbleSorted = false;
 
+// navigator object positioned at bottom-right for maximized view of data bars
 class NavigatorObject {
   constructor() {
     let navigator = document.getElementById("navigator");
@@ -35,6 +37,7 @@ class NavigatorObject {
 const navigator = new NavigatorObject();
 var ctxnav = navigator.getCtx;
 
+// update navigator function for re-rendering vertical data bars
 const UpdateNavigator = () => {
   ctxnav.strokeStyle = "rgb(110, 48, 48)";
   ctxnav.lineWidth = 2;
@@ -50,9 +53,10 @@ const UpdateNavigator = () => {
 
 UpdateNavigator();
 
-var HbarArray = [];
-var ShiftedBars = [];
+var HbarArray = []; // vertical data bars - unsorted set
+var ShiftedBars = []; // shifted bars from heap sort in binary sort order
 
+// canvas object for rendering main canvas ui for data bar set
 class CanvasObject {
   constructor() {
     this.Canvas = document.getElementById("canvas");
@@ -81,23 +85,23 @@ class CanvasObject {
 }
 
 const canvas = new CanvasObject();
-let minErr = 0.40;
-let maxErr = 0.45;
-var midpoint = canvas._width * 0.5;
+let minErr = 0.40; // adjustable params from vbar positioning
+let maxErr = 0.45; // adjustable params from vbar positioning
+var midpoint = canvas._width * 0.5; // midpoint value for data bar set
 const ctx = canvas.getCtx;
 
-var minNum = 5;
-var maxNum = 200;
+var minNum = 5; // minimum number of data bars
+var maxNum = 200; // maximum number of data bars
 var n = maxNum;
-const gap = 1;
-let min = 100;
-let max = 500;
-var minWidth = 3;
-var maxWidth = 60;
-var hbarwidith = minWidth;
-var fswap = false;
-var lswap = false;
-var GeneralSpeed = 500;
+const gap = 1; // data bar gap
+let min = 100; // minimum height for vertical bar
+let max = 500; // maximum height for vertical bar
+var minWidth = 3; // minimum width for vertical bar
+var maxWidth = 60; // minimum width for vertical bar
+var hbarwidith = minWidth; // default width set for data bar
+var fswap = false; // forward swap
+var lswap = false; // last or backward swap
+var GeneralSpeed = 500; // default sorting speed in milliseconds
 
 class ComponentHBar {
     constructor(x, y, width, height, index) {
