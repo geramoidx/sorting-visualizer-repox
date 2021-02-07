@@ -109,51 +109,52 @@ class ComponentHBar {
         this._x = x;
         this._y = y;
         this._wd = width;
-        this.rs = 0.5; // this is the resize ration of the Hbar component
-        this._var = this._wd * this.rs;
+        this.rs = 0.5; // this is the resize ration of the Vbar component
+        this._var = this._wd * this.rs; // maximum variable width for Vbar component
         this._hg = height;
         this.isResized = true;
-        this.speed = GeneralSpeed;
+        this.speed = GeneralSpeed; // speed value for Vbar sorting and array resizing
         this.color = "#00b";
     }
 
-    get CurrentObj() {
+    get CurrentObj() { 
         return this;
     }
 
     display() {
+        // display Vbar component height value
         ctx.fillStyle = this.color;
         ctx.fillRect(this._x, this._y, this._wd, this._hg);
         ctx.font = this._wd * 0.30 + "px consolas";
-
+        // draw Vbar component with passed in height value
         ctx.fillStyle = "#ffb";
         ctx.fillText(this._hg, this._x + (this._wd * 0.25), 80);
-
+        // gap
         ctx.strokeStyle = "#ffb";
         ctx.lineWidth = 1;
         ctx.strokeRect(this._x, this._y, this._wd, this._hg);
     }
-
+    // misplaced Vbar component in sort order
     misplaced() {
         this.color = "red";
         this.display();
     }
-
+    // ordered relatively to adjacent Vbar components
     mark() {
         this.color = "green";
         this.display();
     }
-
+    // reordered but not properly sorted 
     unmark() {
         this.color = "#00b";
         this.display();
     }
-
+    // sorted Vbar component
     sortedbar() {
         this.color = "rgb(110, 48, 48)";
         this.display();
     }
-
+    // resize Vbar component function
     resize(template = true) {
 
         if (!this.isResized && template) {
